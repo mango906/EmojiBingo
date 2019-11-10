@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import BingoItem from '../components/BingoItem';
 
-interface BingoProps {
+interface CountProps {
    count: number;
 }
 
@@ -19,7 +19,7 @@ const BingoBoard = () => {
       align-items: center;
    `
 
-   const Board = styled("div") <BingoProps>`
+   const Board = styled("div") <CountProps>`
       display: grid;
       grid-template-columns: repeat(${props => props.count}, 5rem);
       grid-template-rows: repeat(${props => props.count}, 5rem);
@@ -29,6 +29,7 @@ const BingoBoard = () => {
    const [count, setCount] = useState<number>(5);
 
    let matrix = [];
+
    for (let i = 0; i < count; i++) {
       matrix[i] = new Array(count).fill({ contents: "", checked: false });
    }
