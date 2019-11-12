@@ -11,14 +11,13 @@ interface Square {
   checked: boolean;
 }
 
-const BingoBoard = () => {
-  const Wrapper = styled("div")`
+const Wrapper = styled("div")`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   `;
 
-  const Board = styled("div") <CountProps>`
+const Board = styled("div") <CountProps>`
     display: grid;
     grid-template-columns: repeat(${props => props.count}, 5rem);
     grid-template-rows: repeat(${props => props.count}, 5rem);
@@ -27,15 +26,16 @@ const BingoBoard = () => {
     margin-top: 20px;
   `;
 
-  const Header = styled("h1")`
+const Header = styled("h1")`
     color: #fff;
     text-align: center;
   `;
 
-  const WhiteFont = styled("div")`
+const WhiteFont = styled("div")`
     color: #fff;
   `;
 
+const BingoBoard = () => {
   const [count, setCount] = useState<number>(5);
 
   let matrix = [];
