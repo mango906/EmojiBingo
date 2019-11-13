@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
+import emojis from "../config/config";
 
 interface CountProps {
   count: number;
@@ -37,6 +38,14 @@ const WhiteFont = styled("div")`
 
 const BingoBoard = () => {
   const [count, setCount] = useState<number>(5);
+
+  const shuffle = useCallback((array: Array<string>) => {
+    for (let i = array.length; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+      console.log(array);
+    }
+  }, []);
 
   let matrix = [];
   for (let i = 0; i < count; i++) {
