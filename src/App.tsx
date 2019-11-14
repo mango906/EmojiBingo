@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import BingoBoard from "./containers/BingoBoard";
+import emojis from "./config/config";
+
+interface Emoji {
+   data: Array<string>;
+   key: number;
+}
 
 const Wrapper = styled("div")`
    background-color: #282c34;
@@ -12,16 +18,37 @@ const Wrapper = styled("div")`
 `;
 
 const Header = styled("h1")`
-    color: #fff;
-    text-align: center;
+   color: #fff;
+   text-align: center;
 `;
 
 const WhiteFont = styled("div")`
-    color: #fff;
+   color: #fff;
 `;
+
+const ShuffleBtn = styled("button")``;
+
+let key = 0;
 
 const App: React.FC = () => {
    const [count, setCount] = useState<number>(5);
+   const [shuffled, setShuffled] = useState<Emoji>({ data: [], key });
+
+   const shuffle = useCallback((array: Array<string>) => {
+      for (let i = array.length - 1; i > 0; i--) {
+         const j = Math.floor(Math.random() * (i + 1));
+         [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+   }, []);
+
+   const handleShuffle = () => {
+      setShuffled({
+         data: shuffle(emojis),
+         key: ++key
+      });
+      // setShuffled(shuffle(emojis));
+   };
 
    return (
       <Wrapper>
@@ -40,7 +67,8 @@ const App: React.FC = () => {
                <option>8</option>
             </select>
          </div>
-         <BingoBoard count={count} />
+         <ShuffleBtn onClick={handleShuffle}>SHUFFLE !</ShuffleBtn>
+         <BingoBoard count={count} emojis={shuffled} />
       </Wrapper>
    );
 };
