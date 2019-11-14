@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface Props {
    rowNumber: number;
    columnNumber: number;
+   contents: string;
 }
 
 const Item = styled.div`
@@ -13,11 +14,11 @@ const Item = styled.div`
    width: 80px;
    height: 80px;
    background-color: #fff;
-   font-size: 2rem;
+   font-size: 3.5rem;
 `;
 
-const BingoItem = ({ rowNumber, columnNumber }: Props) => {
-   return <Item>😍</Item>;
+const BingoItem = ({ rowNumber, columnNumber, contents }: Props) => {
+   return <Item>{contents}</Item>;
 };
 
 export default BingoItem;
