@@ -6,14 +6,9 @@ interface BoardProps {
    count: number;
 }
 
-interface Emoji {
-   data: Array<string>;
-   key: number;
-}
-
 interface Props {
    count: number;
-   emojis: Emoji;
+   emojis: Array<string>;
 }
 
 interface Square {
@@ -46,7 +41,7 @@ const BingoBoard = ({ count, emojis }: Props) => {
    for (let i = 0; i < count; i++) {
       for (let j = 0; j < count; j++) {
          matrix[i][j] = {
-            contents: emojis.data[i * count + j],
+            contents: emojis[i * count + j],
             checked: false
          };
       }

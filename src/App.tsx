@@ -28,11 +28,9 @@ const WhiteFont = styled("div")`
 
 const ShuffleBtn = styled("button")``;
 
-let key = 0;
-
 const App: React.FC = () => {
    const [count, setCount] = useState<number>(5);
-   const [shuffled, setShuffled] = useState<Emoji>({ data: [], key });
+   const [shuffled, setShuffled] = useState<Array<string>>([]);
 
    const shuffle = useCallback((array: Array<string>) => {
       for (let i = array.length - 1; i > 0; i--) {
@@ -43,11 +41,7 @@ const App: React.FC = () => {
    }, []);
 
    const handleShuffle = () => {
-      setShuffled({
-         data: shuffle(emojis),
-         key: ++key
-      });
-      // setShuffled(shuffle(emojis));
+      setShuffled(Array.from(shuffle(emojis)));
    };
 
    return (
