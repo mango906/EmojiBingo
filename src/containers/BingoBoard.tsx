@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
@@ -31,7 +31,7 @@ const Board = styled("div")<BoardProps>`
    margin-top: 20px;
 `;
 
-const BingoBoard = ({ count, emojis }: Props) => {
+const BingoBoard: React.FC<Props> = ({ count, emojis }) => {
    let matrix: Array<Array<Square>> = [];
 
    for (let i = 0; i < count; i++) {
@@ -47,6 +47,13 @@ const BingoBoard = ({ count, emojis }: Props) => {
       }
    }
 
+   const handleClick = useCallback((row: number, column: number) => {
+      matrix[row][column] = {
+         ...matrix[row][column],
+         checked: true
+      };
+   }, []);
+
    return (
       <Wrapper>
          <Board count={count}>
@@ -56,8 +63,10 @@ const BingoBoard = ({ count, emojis }: Props) => {
                      <BingoItem
                         key={rowNumber * count + columnNumber}
                         contents={el.contents}
+                        checked={el.checked}
                         rowNumber={rowNumber}
                         columnNumber={columnNumber}
+                        handleClick={handleClick}
                      />
                   );
                })

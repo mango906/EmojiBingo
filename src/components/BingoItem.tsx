@@ -5,20 +5,40 @@ interface Props {
    rowNumber: number;
    columnNumber: number;
    contents: string;
+   handleClick: any;
+   checked: boolean;
 }
 
-const Item = styled.div`
+interface ItemProps {
+   checked: boolean;
+}
+
+const Item = styled("div")<ItemProps>`
    display: flex;
    align-items: center;
    justify-content: center;
    width: 80px;
    height: 80px;
-   background-color: #fff;
+   background-color: ${props => (props.checked ? "#000" : "#fff")}
    font-size: 3.5rem;
+   cursor: pointer;
 `;
 
-const BingoItem = ({ rowNumber, columnNumber, contents }: Props) => {
-   return <Item>{contents}</Item>;
+const BingoItem: React.FC<Props> = ({
+   rowNumber,
+   columnNumber,
+   contents,
+   handleClick,
+   checked
+}) => {
+   return (
+      <Item
+         checked={checked}
+         onClick={() => handleClick(rowNumber, columnNumber)}
+      >
+         {contents}
+      </Item>
+   );
 };
 
 export default BingoItem;
