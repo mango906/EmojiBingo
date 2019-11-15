@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
@@ -32,7 +32,7 @@ const Board = styled("div")<BoardProps>`
 `;
 
 const BingoBoard = ({ count, emojis }: Props) => {
-   let matrix: Array<any> = [];
+   let matrix: Array<Array<Square>> = [];
 
    for (let i = 0; i < count; i++) {
       matrix[i] = new Array(count).fill({ contents: "", checked: false });

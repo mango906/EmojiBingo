@@ -3,11 +3,6 @@ import styled from "styled-components";
 import BingoBoard from "./containers/BingoBoard";
 import emojis from "./config/config";
 
-interface Emoji {
-   data: Array<string>;
-   key: number;
-}
-
 const Wrapper = styled("div")`
    background-color: #282c34;
    width: 100vw;
