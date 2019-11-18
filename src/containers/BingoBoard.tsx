@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
+import { useBingo } from "../contexts/BingoContext";
+
 interface BoardProps {
    count: number;
 }
@@ -31,7 +33,11 @@ const Board = styled("div")<BoardProps>`
    margin-top: 20px;
 `;
 
-const BingoBoard: React.FC<Props> = ({ count, emojis }) => {
+const BingoBoard: React.FC<Props> = ({ emojis }) => {
+   const [state, dispatch] = useBingo();
+
+   const { count } = state;
+
    let matrix: Array<Array<Square>> = [];
 
    for (let i = 0; i < count; i++) {

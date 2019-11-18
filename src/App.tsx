@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import BingoBoard from "./containers/BingoBoard";
 import emojis from "./config/config";
+import { useBingo, SET_COUNT } from "./contexts/BingoContext";
 
 const Wrapper = styled("div")`
    background-color: #282c34;
@@ -27,6 +28,8 @@ const App: React.FC = () => {
    const [count, setCount] = useState<number>(5);
    const [shuffled, setShuffled] = useState<Array<string>>([]);
 
+   const [state, dispatch] = useBingo();
+
    const shuffle = useCallback((array: Array<string>) => {
       for (let i = array.length - 1; i > 0; i--) {
          const j = Math.floor(Math.random() * (i + 1));
@@ -45,10 +48,15 @@ const App: React.FC = () => {
          <div style={{ display: "flex", justifyContent: "center" }}>
             <WhiteFont>개수</WhiteFont>
             <select
-               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                  setCount(parseInt(e.target.value))
+               onChange={
+                  (e: React.ChangeEvent<HTMLSelectElement>) =>
+                     dispatch({
+                        type: SET_COUNT,
+                        payload: parseInt(e.target.value)
+                     })
+                  // setCount(parseInt(e.target.value))
                }
-               value={count}
+               value={state.count}
             >
                <option>5</option>
                <option>6</option>

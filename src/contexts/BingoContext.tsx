@@ -1,28 +1,48 @@
-import React, { useReducer, createContext } from "react";
+import React, { useReducer, createContext, useContext } from "react";
+
+export const SHUFFLE = "bingo/shuffle";
+export const SET_COUNT = "bingo/count";
 
 interface Bingo {
    row: number;
    column: number;
 }
 
-const initialState: Bingo[] = [];
+interface Square {
+   contents: string;
+   checked: boolean;
+}
 
-const BingoReducer = (state: Bingo[] = initialState, action: any) => {
+const initialState: any = {
+   count: 5,
+   emojis: []
+};
+
+const BingoReducer = (state: any = initialState, action: any) => {
    switch (action.type) {
-      case "SELECT":
+      case SHUFFLE:
          return state;
+      case SET_COUNT:
+         return { ...state, count: action.payload };
       default:
          throw new Error();
    }
 };
 
-const BingoContext = createContext({} as Bingo[]);
+const BingoContext = createContext([] as any);
 
 const BingoProvider: React.FC<any> = ({ children }) => {
-   const [state, dispatch] = useReducer(BingoReducer, initialState);
+   const contextValue = useReducer(BingoReducer, initialState);
    return (
-      <BingoContext.Provider value={state}>{children}</BingoContext.Provider>
+      <BingoContext.Provider value={contextValue}>
+         {children}
+      </BingoContext.Provider>
    );
 };
 
-export default BingoProvider;
+const useBingo = () => {
+   const contextValue = useContext(BingoContext);
+   return contextValue;
+};
+
+export { BingoProvider, useBingo };
