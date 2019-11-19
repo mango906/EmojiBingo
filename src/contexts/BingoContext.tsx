@@ -20,7 +20,13 @@ interface Location {
    column: number;
 }
 
-const initialState: any = {
+interface State {
+   count: number;
+   matrix: Square[][];
+   emojis: Array<string>;
+}
+
+const initialState: State = {
    count: 5,
    matrix: [],
    emojis: []
@@ -34,7 +40,7 @@ const initialize = (count: number) => {
    return matrix;
 };
 
-const shuffle = (emojis: Array<string>, matrix: any, count: number) => {
+const shuffle = (emojis: Array<string>, matrix: Square[][], count: number) => {
    for (let i = 0; i < count; i++) {
       for (let j = 0; j < count; j++) {
          matrix[i][j] = {
@@ -45,12 +51,12 @@ const shuffle = (emojis: Array<string>, matrix: any, count: number) => {
    }
 };
 
-const handleClick = (location: Location, matrix: any) => {
+const handleClick = (location: Location, matrix: Square[][]) => {
    const { row, column } = location;
    matrix[row][column].checked = true;
 };
 
-const BingoReducer = (state: any = initialState, action: any) => {
+const BingoReducer = (state = initialState, action: any) => {
    switch (action.type) {
       case INIT:
          return { ...state, matrix: initialize(state.count) };
@@ -69,7 +75,7 @@ const BingoReducer = (state: any = initialState, action: any) => {
 
 const BingoContext = createContext([] as any);
 
-const BingoProvider: React.FC<any> = ({ children }) => {
+const BingoProvider: React.FC<React.ReactNode> = ({ children }) => {
    const contextValue = useReducer(BingoReducer, initialState);
    return (
       <BingoContext.Provider value={contextValue}>

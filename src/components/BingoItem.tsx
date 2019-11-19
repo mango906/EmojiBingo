@@ -5,7 +5,7 @@ interface Props {
    rowNumber: number;
    columnNumber: number;
    contents: string;
-   handleClick: any;
+   handleClick(rowNumber: number, columnNumber: number): void;
    checked: boolean;
 }
 
