@@ -25,7 +25,6 @@ const WhiteFont = styled("div")`
 const ShuffleBtn = styled("button")``;
 
 const App: React.FC = () => {
-   const [count, setCount] = useState<number>(5);
    const [shuffled, setShuffled] = useState<Array<string>>([]);
 
    const [state, dispatch] = useBingo();
@@ -48,13 +47,11 @@ const App: React.FC = () => {
          <div style={{ display: "flex", justifyContent: "center" }}>
             <WhiteFont>개수</WhiteFont>
             <select
-               onChange={
-                  (e: React.ChangeEvent<HTMLSelectElement>) =>
-                     dispatch({
-                        type: SET_COUNT,
-                        payload: parseInt(e.target.value)
-                     })
-                  // setCount(parseInt(e.target.value))
+               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  dispatch({
+                     type: SET_COUNT,
+                     payload: parseInt(e.target.value)
+                  })
                }
                value={state.count}
             >
@@ -65,7 +62,7 @@ const App: React.FC = () => {
             </select>
          </div>
          <ShuffleBtn onClick={handleShuffle}>SHUFFLE !</ShuffleBtn>
-         <BingoBoard count={count} emojis={shuffled} />
+         <BingoBoard emojis={shuffled} />
       </Wrapper>
    );
 };

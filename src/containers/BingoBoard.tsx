@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
@@ -9,7 +9,6 @@ interface BoardProps {
 }
 
 interface Props {
-   count: number;
    emojis: Array<string>;
 }
 
