@@ -3,6 +3,7 @@ import React, { useReducer, createContext, useContext } from "react";
 export const INIT = "bingo/init";
 export const SHUFFLE = "bingo/shuffle";
 export const SET_COUNT = "bingo/count";
+export const CLICK = "bingo/click";
 
 interface Bingo {
    row: number;
@@ -12,6 +13,11 @@ interface Bingo {
 interface Square {
    contents: string;
    checked: boolean;
+}
+
+interface Location {
+   row: number;
+   column: number;
 }
 
 const initialState: any = {
@@ -39,6 +45,11 @@ const shuffle = (emojis: Array<string>, matrix: any, count: number) => {
    }
 };
 
+const handleClick = (location: Location, matrix: any) => {
+   const { row, column } = location;
+   matrix[row][column].checked = true;
+};
+
 const BingoReducer = (state: any = initialState, action: any) => {
    switch (action.type) {
       case INIT:
@@ -48,6 +59,9 @@ const BingoReducer = (state: any = initialState, action: any) => {
          return { ...state };
       case SET_COUNT:
          return { ...state, count: action.payload };
+      case CLICK:
+         handleClick(action.payload, state.matrix);
+         return { ...state };
       default:
          throw new Error();
    }

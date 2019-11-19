@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
-import { useBingo, INIT } from "../contexts/BingoContext";
+import { useBingo, INIT, CLICK } from "../contexts/BingoContext";
 
 interface BoardProps {
    count: number;
@@ -37,7 +37,9 @@ const BingoBoard: React.FC = () => {
       dispatch({ type: INIT });
    }, [count]);
 
-   const handleClick = useCallback((row: number, column: number) => {}, []);
+   const handleClick = useCallback((row: number, column: number) => {
+      dispatch({ type: CLICK, payload: { row, column } });
+   }, []);
 
    return (
       <Wrapper>
