@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import BingoBoard from "./containers/BingoBoard";
 import emojis from "./config/config";
-import { useBingo, SET_COUNT } from "./contexts/BingoContext";
+import { useBingo, SET_COUNT, SHUFFLE } from "./contexts/BingoContext";
 
 const Wrapper = styled("div")`
    background-color: #282c34;
@@ -38,7 +38,8 @@ const App: React.FC = () => {
    }, []);
 
    const handleShuffle = () => {
-      setShuffled(Array.from(shuffle(emojis)));
+      dispatch({ type: SHUFFLE, payload: shuffle(emojis) });
+      // setShuffled(Array.from(shuffle(emojis)));
    };
 
    return (

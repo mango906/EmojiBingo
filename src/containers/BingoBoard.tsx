@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import BingoItem from "../components/BingoItem";
 
-import { useBingo } from "../contexts/BingoContext";
+import { useBingo, INIT } from "../contexts/BingoContext";
 
 interface BoardProps {
    count: number;
@@ -35,28 +35,32 @@ const Board = styled("div")<BoardProps>`
 const BingoBoard: React.FC<Props> = ({ emojis }) => {
    const [state, dispatch] = useBingo();
 
-   const { count } = state;
+   const { count, matrix } = state;
 
-   let matrix: Array<Array<Square>> = [];
+   useEffect(() => {
+      dispatch({ type: INIT });
+   }, [count]);
 
-   for (let i = 0; i < count; i++) {
-      matrix[i] = new Array(count).fill({ contents: "", checked: false });
-   }
+   // let matrix: Array<Array<Square>> = [];
 
-   for (let i = 0; i < count; i++) {
-      for (let j = 0; j < count; j++) {
-         matrix[i][j] = {
-            contents: emojis[i * count + j],
-            checked: false
-         };
-      }
-   }
+   // for (let i = 0; i < count; i++) {
+   //    matrix[i] = new Array(count).fill({ contents: "", checked: false });
+   // }
+
+   // for (let i = 0; i < count; i++) {
+   //    for (let j = 0; j < count; j++) {
+   //       matrix[i][j] = {
+   //          contents: emojis[i * count + j],
+   //          checked: false
+   //       };
+   //    }
+   // }
 
    const handleClick = useCallback((row: number, column: number) => {
-      matrix[row][column] = {
-         ...matrix[row][column],
-         checked: true
-      };
+      // matrix[row][column] = {
+      //    ...matrix[row][column],
+      //    checked: true
+      // };
    }, []);
 
    return (
