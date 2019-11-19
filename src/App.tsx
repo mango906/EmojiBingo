@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import BingoBoard from "./containers/BingoBoard";
+import Emoji from "./components/Emoji";
 import emojis from "./config/config";
 import { useBingo, SET_COUNT, SHUFFLE } from "./contexts/BingoContext";
 
@@ -41,7 +42,11 @@ const App: React.FC = () => {
 
    return (
       <Wrapper>
-         <Header>😈이모지 빙고👿</Header>
+         <Header>
+            <Emoji contents="😈" />
+            이모지 빙고
+            <Emoji contents="👿" />
+         </Header>
          <div style={{ display: "flex", justifyContent: "center" }}>
             <WhiteFont>개수</WhiteFont>
             <select

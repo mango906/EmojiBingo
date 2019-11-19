@@ -35,11 +35,14 @@ const BingoBoard: React.FC = () => {
 
    useEffect(() => {
       dispatch({ type: INIT });
-   }, [count]);
+   }, [count, dispatch]);
 
-   const handleClick = useCallback((row: number, column: number) => {
-      dispatch({ type: CLICK, payload: { row, column } });
-   }, []);
+   const handleClick = useCallback(
+      (row: number, column: number) => {
+         dispatch({ type: CLICK, payload: { row, column } });
+      },
+      [dispatch]
+   );
 
    return (
       <Wrapper>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Emoji from "./Emoji";
 
 interface Props {
    rowNumber: number;
@@ -19,7 +20,7 @@ const Item = styled("div")<ItemProps>`
    justify-content: center;
    width: 80px;
    height: 80px;
-   background-color: ${props => (props.checked ? "#000" : "#fff")}
+   background-color: ${props => (props.checked ? "#bbb" : "#fff")}
    font-size: 3.5rem;
    cursor: pointer;
 `;
@@ -36,7 +37,7 @@ const BingoItem: React.FC<Props> = ({
          checked={checked}
          onClick={() => handleClick(rowNumber, columnNumber)}
       >
-         {contents}
+         <Emoji contents={contents}></Emoji>
       </Item>
    );
 };
