@@ -8,10 +8,6 @@ interface BoardProps {
    count: number;
 }
 
-interface Props {
-   emojis: Array<string>;
-}
-
 interface Square {
    contents: string;
    checked: boolean;
@@ -32,7 +28,7 @@ const Board = styled("div")<BoardProps>`
    margin-top: 20px;
 `;
 
-const BingoBoard: React.FC<Props> = ({ emojis }) => {
+const BingoBoard: React.FC = () => {
    const [state, dispatch] = useBingo();
 
    const { count, matrix } = state;
@@ -41,27 +37,7 @@ const BingoBoard: React.FC<Props> = ({ emojis }) => {
       dispatch({ type: INIT });
    }, [count]);
 
-   // let matrix: Array<Array<Square>> = [];
-
-   // for (let i = 0; i < count; i++) {
-   //    matrix[i] = new Array(count).fill({ contents: "", checked: false });
-   // }
-
-   // for (let i = 0; i < count; i++) {
-   //    for (let j = 0; j < count; j++) {
-   //       matrix[i][j] = {
-   //          contents: emojis[i * count + j],
-   //          checked: false
-   //       };
-   //    }
-   // }
-
-   const handleClick = useCallback((row: number, column: number) => {
-      // matrix[row][column] = {
-      //    ...matrix[row][column],
-      //    checked: true
-      // };
-   }, []);
+   const handleClick = useCallback((row: number, column: number) => {}, []);
 
    return (
       <Wrapper>

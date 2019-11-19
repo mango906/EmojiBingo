@@ -25,8 +25,6 @@ const WhiteFont = styled("div")`
 const ShuffleBtn = styled("button")``;
 
 const App: React.FC = () => {
-   const [shuffled, setShuffled] = useState<Array<string>>([]);
-
    const [state, dispatch] = useBingo();
 
    const shuffle = useCallback((array: Array<string>) => {
@@ -39,7 +37,6 @@ const App: React.FC = () => {
 
    const handleShuffle = () => {
       dispatch({ type: SHUFFLE, payload: shuffle(emojis) });
-      // setShuffled(Array.from(shuffle(emojis)));
    };
 
    return (
@@ -63,7 +60,7 @@ const App: React.FC = () => {
             </select>
          </div>
          <ShuffleBtn onClick={handleShuffle}>SHUFFLE !</ShuffleBtn>
-         <BingoBoard emojis={shuffled} />
+         <BingoBoard />
       </Wrapper>
    );
 };
