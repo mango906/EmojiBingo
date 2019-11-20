@@ -5,11 +5,6 @@ export const SHUFFLE = "bingo/shuffle";
 export const SET_COUNT = "bingo/count";
 export const CLICK = "bingo/click";
 
-interface Bingo {
-   row: number;
-   column: number;
-}
-
 interface Square {
    contents: string;
    checked: boolean;
@@ -53,6 +48,7 @@ const shuffle = (emojis: Array<string>, matrix: Square[][], count: number) => {
 
 const handleClick = (location: Location, matrix: Square[][]) => {
    const { row, column } = location;
+   if (matrix[row][column].checked) return;
    matrix[row][column].checked = true;
 };
 
